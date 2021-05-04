@@ -25,16 +25,18 @@ If you are asking that, you probably don't need that. This is for people that ar
 It's very simple. To trigg a conversion you need to send to your WP only 3 parameters:
 
 > test_id: the ID of the test itself
+
 > variation_id: the ID of the page/post where the visitor landed
+
 > value: the value of the conversion
 
 But, of course, for your server be able to send those data, it should know those data.
 
 That's why to use the plugin there are 2 main steps:
 
-> Somewhere you need to send to your server the test_id and `variation_id`. I use a plugin for that, and send it for my payment processor as parameters. When my client pays, I get those data back on the API.
+1. Somewhere you need to send to your server the test_id and `variation_id`. I use a plugin for that, and send it for my payment processor as parameters. When my client pays, I get those data back on the API.
 
-> Send the data to a endpoint that will call the conversion.
+2. Send the data to a endpoint that will call the conversion.
 
 ### Step #1
 
@@ -69,6 +71,7 @@ If `is_ab_test` returns true, them the current ID is an variation ID.
 ### Get all AB Tests
 
 > GET
+
 > /wp-json/tvo-apo-api/v1/ab-tests
 
 You can send the parameter `test_status` (`running`|`completed`) to filter tests that are currently running or that you already stoped.
@@ -84,8 +87,11 @@ Just add param test_id. It will return the test data or a 404 if the test doesn'
 ### Add Conversion
 
 > x-wwww-form-urlencoded
+
 > POST
+
 > /wp-json/tvo-apo-api/v1/conversion
+
 > params: test_id | variation_id | value
 
 ## That's all guys
