@@ -79,6 +79,18 @@ class thrive_optimize_service
         return $_instance->current_test["test_data"]["id"];
     }
 
+    public static function get_current_test_title()
+    {
+        $_instance = new thrive_optimize_service();
+        return $_instance->current_test["test_data"]["title"];
+    }
+
+    public static function is_ab_test()
+    {
+        $_instance = new thrive_optimize_service();
+        return $_instance->_is_variation_page(get_the_ID());
+    }
+
     protected function _set_goal_page_custom_revenue($_goal_page, $_value)
     {
         $_goal_page['revenue'] = $_value;
