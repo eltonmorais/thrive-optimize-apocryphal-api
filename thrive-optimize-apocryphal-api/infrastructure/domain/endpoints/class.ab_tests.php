@@ -39,11 +39,31 @@ class ab_tests extends endpoints_handler_get
 
     protected function _get_tests_list()
     {
-        echo json_encode($this->_thrive_optimize_service->get_tests($this->params['test_status']));
+        $_return_data = $this->_thrive_optimize_service->tests_list_all($this->params['test_status']);
+        
+        if (empty($_return_data)) {
+            http_response_code(404);
+            $_response["message"] = "No AB Test found.";
+            $_response["status"] = "error";
+            echo json_encode($_response);
+            die();
+        }
+
+        echo json_encode($_return_data);
     }
 
     protected function _get_specific_test_data()
     {
-        echo json_encode($this->_thrive_optimize_service->get_test_by_id($this->params['test_id']));
+        $_return_data = $this->_thrive_optimize_service->tests_list_by_id($this->params['test_id']);
+
+        if (empty($_return_data)) {
+            http_response_code(404);
+            $_response["message"] = "The test ID {$this->params['test_id']} was not found.";
+            $_response["status"] = "error";
+            echo json_encode($_response);
+            die();
+        }
+
+        echo json_encode($_return_data);
     }
 }

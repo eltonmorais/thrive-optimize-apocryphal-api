@@ -53,11 +53,14 @@ class conversion extends endpoints_handler_post
 
     protected function _conversion_add()
     {
-        $_thrive_optimize_service = new thrive_optimize_service();
-        $_thrive_optimize_service->conversion_add(
+        $result = $this->_thrive_optimize_service->conversion_add(
             $this->_test_id,
             $this->_variation_id,
             $this->_value
         );
+
+        http_response_code($result["status"]);
+        echo json_encode($result);
+        die();
     }
 }
