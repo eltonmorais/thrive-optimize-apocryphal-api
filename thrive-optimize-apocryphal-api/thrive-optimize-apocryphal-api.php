@@ -4,7 +4,7 @@ namespace apt\thewhale;
 
 /**
  * @package Thrive Optimize Apocryphal API
- * @version 0.0.1
+ * @version 0.0.1-release-candidate
  */
 /*
 Plugin Name: Thrive Optimize Apocryphal API
