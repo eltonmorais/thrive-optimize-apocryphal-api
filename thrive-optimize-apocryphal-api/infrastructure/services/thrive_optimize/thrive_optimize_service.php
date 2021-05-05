@@ -43,7 +43,18 @@ class thrive_optimize_service
     function _set_current_test()
     {
         if (is_page()) {
-            $this->current_test = $this->tests_list_by_id(get_the_ID());
+            $this->current_test = $this->tests_list_by_variation_id(get_the_ID());
+        }
+    }
+
+    function tests_list_by_variation_id($id)
+    {
+        foreach ($this->tests as $_test) {
+            foreach ($_test["variations"] as $variation) {
+                if ($variation["ID"] == $id) {
+                    return $_test;
+                }
+            }
         }
     }
 
