@@ -7,6 +7,7 @@ class thrive_optimize_service
     protected $_thrive_instance;
     protected $tests;
     protected $current_test;
+    static $_instance;
 
     function __construct()
     {
@@ -86,20 +87,32 @@ class thrive_optimize_service
 
     public static function get_current_test_id()
     {
-        $_instance = new thrive_optimize_service();
-        return $_instance->current_test["test_data"]["id"];
+        if (thrive_optimize_service::$_instance == null) {
+            thrive_optimize_service::$_instance = new thrive_optimize_service();
+        }
+
+        thrive_optimize_service::$_instance = new thrive_optimize_service();
+        return thrive_optimize_service::$_instance->current_test["test_data"]["id"];
     }
 
     public static function get_current_test_title()
     {
-        $_instance = new thrive_optimize_service();
-        return $_instance->current_test["test_data"]["title"];
+        if (thrive_optimize_service::$_instance == null) {
+            thrive_optimize_service::$_instance = new thrive_optimize_service();
+        }
+
+        thrive_optimize_service::$_instance = new thrive_optimize_service();
+        return thrive_optimize_service::$_instance->current_test["test_data"]["title"];
     }
 
     public static function is_ab_test()
     {
-        $_instance = new thrive_optimize_service();
-        return $_instance->_is_variation_page(get_the_ID());
+        if (thrive_optimize_service::$_instance == null) {
+            thrive_optimize_service::$_instance = new thrive_optimize_service();
+        }
+
+        thrive_optimize_service::$_instance->_is_variation_page(get_the_ID());
+        return thrive_optimize_service::$_instance->_is_variation_page(get_the_ID());
     }
 
     protected function _set_goal_page_custom_revenue($_goal_page, $_value)
@@ -121,6 +134,10 @@ class thrive_optimize_service
 
     protected function _is_variation_page($_variation_id)
     {
+        if (!is_array($this->current_test['variations'])) {
+            return false;
+        }
+
         foreach ($this->current_test['variations'] as $variation) {
             if ($_variation_id == $variation["ID"]) {
                 return true;

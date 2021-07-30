@@ -4,14 +4,14 @@ namespace apt\thewhale;
 
 /**
  * @package Thrive Optimize Apocryphal API
- * @version 0.0.1-release-candidate
+ * @version 0.0.2-release-candidate
  */
 /*
 Plugin Name: Thrive Optimize Apocryphal API
 Plugin URI: http://autopilottools.com
 Description: Integrate WP with Flitshop Headless.
 Author: Auto Pilot Tools
-Version: 0.0.1
+Version: 0.0.2
 Author URI: http://autopilottools.com/
 */
 
